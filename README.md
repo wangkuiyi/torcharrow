@@ -13,73 +13,95 @@ It plans to provide:
 * GPU backend via [libcudf](https://docs.rapids.ai/api/libcudf/stable/)
 * High-performance C++ UDF support with vectorization
 
-## Installation
-
-### Binaries
+## Releases
 
 Coming soon!
 
-### From Source
+## Build from Source
 
 If you are installing from source, you will need Python 3.8 or later and a C++17 compiler. Also, we highly recommend installing an [Miniconda](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links) environment.
 
-#### Get the TorchArrow Source
+Run the following command to clone this project.
+
 ```bash
 git clone --recursive https://github.com/facebookresearch/torcharrow
 cd torcharrow
-# if you are updating an existing checkout
+```
+
+To update git modules in an existing local clone, run the following command:
+
+```bash
+cd torcharrow
 git submodule sync --recursive
 git submodule update --init --recursive
 ```
 
-#### Install Dependencies
+### Install Dependencies
 
-On MacOS
+- On MacOS
 
-[HomeBrew](https://brew.sh/) is required to install development tools on MacOS.
+  [Homebrew](https://brew.sh/) is required to install development tools on MacOS.
 
-```bash
-# Install dependencies from Brew
-brew install --formula ninja cmake ccache protobuf icu4c boost gflags glog libevent lz4 lzo snappy xz zstd
+  ```bash
+  brew install --formula ninja cmake ccache protobuf icu4c boost gflags glog libevent lz4 lzo snappy xz zstd
+  ```
 
-# Build and install other dependencies
-scripts/build_mac_dep.sh ranges_v3 googletest fmt double_conversion folly re2
-```
+  Run the following script to download and build dependencies.
 
-On Ubuntu (20.04 or later)
-```bash
-# Install dependencies from APT
-apt install -y g++ cmake ccache ninja-build checkinstall \
+  ```bash
+  scripts/build_mac_dep.sh ranges_v3 googletest fmt double_conversion folly re2
+  ```
+
+- On Ubuntu (20.04 or later)
+
+  Run the following command to install dependencies using the package manager apt.
+  ```bash
+   apt install -y g++ cmake ccache ninja-build checkinstall \
     libssl-dev libboost-all-dev libdouble-conversion-dev libgoogle-glog-dev \
     libbz2-dev libgflags-dev libgtest-dev libgmock-dev libevent-dev libfmt-dev \
     libprotobuf-dev liblz4-dev libzstd-dev libre2-dev libsnappy-dev liblzo2-dev \
     protobuf-compiler
-# Build and install Folly
-scripts/install_ubuntu_folly.sh
-```
+  ```
+  
+  Run the following command to download and install folly, the Facebook open source library.
+  ```bash
+  scripts/install_ubuntu_folly.sh
+  ```
 
-#### Install TorchArrow
-For local development, you can build with debug mode:
-```
+### Build and Install TorchArrow
+
+Optionally, you can create a local Python environment using `conda` if you have Miniconda installed.  
+This allows you to select a specific version of Python and to install packages into this local 
+environment without pollute the system-wide environment.
+
+The following command builds the debug version.
+
+```bash
 DEBUG=1 python setup.py develop
 ```
 
 And run unit tests with
+
 ```
 python -m unittest -v
 ```
 
-To install TorchArrow with release mode (WARNING: may take very long to build):
-```
+To build the release version of TorchArrow, please run the following command.  This may take a long time.
+
+```bash
 python setup.py install
 ```
 
 
 ## Documentation
+
 This [10 minutes tutorial](https://github.com/facebookresearch/torcharrow/blob/main/tutorial/tutorial.ipynb) provides a short introduction to TorchArrow. More documents on advanced topics are coming soon!
 
+
 ## Future Plans
+
 We hope to sufficiently expand the library, harden APIs, and gather feedback to enable a beta release at the time of the PyTorch 1.11 release (early 2022).
+
 
 ## License
 
